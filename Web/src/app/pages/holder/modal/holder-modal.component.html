@@ -1,0 +1,208 @@
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+  <p-messages [(value)]="msgs" [enableService]="false"> </p-messages>
+  <div class="p-fluid grid formgrid">
+    <div class="field col-12 md:col-4">
+      <div class="flex align-items-center justify-content-between">
+        <div class="mb-1 text-[15px]">
+          HN
+          <span class="p-error"> *</span>
+        </div>
+        <div class="text-gray-400 text-[12px]">
+          {{ data.holderNumber?.length || 0 }}/10
+        </div>
+      </div>
+      <input
+        pInputText
+        type="text"
+        id="holderNumber"
+        name="holderNumber"
+        #holderNumber="ngModel"
+        [(ngModel)]="data.holderNumber"
+        maxlength="10"
+        required
+        class="w-full"
+        [ngClass]="{
+          'ng-invalid ng-dirty': submitted && holderNumber.errors
+        }"
+        pAutoFocus
+        [autofocus]="true"
+      />
+      @if (submitted && holderNumber.errors) {
+        @if (holderNumber.errors.required) {
+          <small class="p-error block"> HN ไม่สามารถเป็นค่าว่างได้ </small>
+        }
+      }
+    </div>
+    <div class="field col-12 md:col-4">
+      <div class="flex align-items-center justify-content-between">
+        <div class="mb-1 text-[15px]">
+          ชื่อ
+          <span class="p-error"> *</span>
+        </div>
+        <div class="text-gray-400 text-[12px]">
+          {{ data.firstName?.length || 0 }}/100
+        </div>
+      </div>
+      <input
+        pInputText
+        type="text"
+        id="firstName"
+        name="firstName"
+        #firstName="ngModel"
+        [(ngModel)]="data.firstName"
+        maxlength="100"
+        required
+        class="w-full"
+        [ngClass]="{
+          'ng-invalid ng-dirty': submitted && firstName.errors
+        }"
+      />
+      @if (submitted && firstName.errors) {
+        @if (firstName.errors.required) {
+          <small class="p-error block"> ชื่อ ไม่สามารถเป็นค่าว่างได้ </small>
+        }
+      }
+    </div>
+    <div class="field col-12 md:col-4">
+      <div class="flex align-items-center justify-content-between">
+        <div class="mb-1 text-[15px]">
+          นามสกุล
+          <span class="p-error"> *</span>
+        </div>
+        <div class="text-gray-400 text-[12px]">
+          {{ data.lastName?.length || 0 }}/100
+        </div>
+      </div>
+      <input
+        pInputText
+        type="text"
+        id="lastName"
+        name="lastName"
+        #lastName="ngModel"
+        [(ngModel)]="data.lastName"
+        maxlength="100"
+        required
+        class="w-full"
+        [ngClass]="{
+          'ng-invalid ng-dirty': submitted && lastName.errors
+        }"
+      />
+      @if (submitted && lastName.errors) {
+        @if (lastName.errors.required) {
+          <small class="p-error block"> นามสกุล ไม่สามารถเป็นค่าว่างได้ </small>
+        }
+      }
+    </div>
+
+    <div class="field col-12 md:col-4">
+      <div class="flex align-items-center justify-content-between">
+        <div class="mb-1 text-[15px]">
+          เบอร์ติดต่อ
+          <span class="p-error"> *</span>
+        </div>
+        <div class="text-gray-400 text-[12px]">
+          {{ data.telephone?.length || 0 }}/20
+        </div>
+      </div>
+      <input
+        pInputText
+        type="text"
+        id="telephone"
+        name="telephone"
+        #telephone="ngModel"
+        [(ngModel)]="data.telephone"
+        maxlength="20"
+        required
+        class="w-full"
+        [ngClass]="{
+          'ng-invalid ng-dirty': submitted && telephone.errors
+        }"
+      />
+      @if (submitted && telephone.errors) {
+        @if (telephone.errors.required) {
+          <small class="p-error block">
+            เบอร์ติดต่อ ไม่สามารถเป็นค่าว่างได้
+          </small>
+        }
+      }
+    </div>
+
+    <div class="field col-12 md:col-4">
+      <div class="flex align-items-center justify-content-between">
+        <div class="mb-1 text-[15px]">
+          Email
+          <span class="p-error"> *</span>
+        </div>
+        <div class="text-gray-400 text-[12px]">
+          {{ data.email?.length || 0 }}/100
+        </div>
+      </div>
+      <input
+        pInputText
+        type="text"
+        id="email"
+        name="email"
+        #email="ngModel"
+        [(ngModel)]="data.email"
+        maxlength="100"
+        required
+        email
+        class="w-full"
+        [ngClass]="{
+          'ng-invalid ng-dirty': submitted && email.errors
+        }"
+      />
+      @if (submitted && email.errors) {
+        @if (email.errors.required) {
+          <small class="p-error block"> Email ไม่สามารถเป็นค่าว่างได้ </small>
+        }
+        @if (email.errors.email) {
+          <small class="p-error block"> Email ไม่ถูกต้อง </small>
+        }
+      }
+    </div>
+  </div>
+  <hr class="style-one" />
+  <div class="flex flex-wrap md:flex-nowrap mt-3 mb-3 gap-2">
+    <div
+      class="flex justify-content-between md:justify-content-start w-full gap-2"
+    >
+      @if (data.id) {
+        <button
+          pButton
+          type="button"
+          id="deleteBtn"
+          name="deleteBtn"
+          icon="pi pi-trash"
+          label="ลบ"
+          class="p-button-danger p-button-rounded w-full md:w-10rem"
+          (click)="onDelete(data)"
+        ></button>
+      }
+    </div>
+    <div
+      class="flex justify-content-between md:justify-content-end w-full gap-2"
+    >
+      <button
+        pButton
+        id="submitBtn"
+        name="submitBtn"
+        type="submit"
+        icon="pi pi-check"
+        label="ยืนยัน"
+        class="p-button-primary p-button-rounded w-full md:w-10rem"
+      ></button>
+
+      <button
+        pButton
+        type="button"
+        id="cancelBtn"
+        name="cancelBtn"
+        icon="pi pi-times"
+        label="ปิด"
+        class="p-button-text p-button-rounded w-full md:w-10rem"
+        (click)="onClose()"
+      ></button>
+    </div>
+  </div>
+</form>

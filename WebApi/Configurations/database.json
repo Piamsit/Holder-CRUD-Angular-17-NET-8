@@ -1,0 +1,6 @@
+{
+  "DatabaseSettings": {
+    "DBProvider": "mssql",
+    "ConnectionString": "Server=.;Database=TestCrud;user id=sa;password=pass;MultipleActiveResultSets=true;Encrypt=false"
+  }
+}

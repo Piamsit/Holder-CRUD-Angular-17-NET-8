@@ -1,0 +1,5 @@
+﻿Default Project : Infrastruture , Startup Project : WebApi
+
+Application
+
+add-migration <CommitMessage> -project Migrations.MSSQL -context ApplicationDbContext -o Migrations/Application
